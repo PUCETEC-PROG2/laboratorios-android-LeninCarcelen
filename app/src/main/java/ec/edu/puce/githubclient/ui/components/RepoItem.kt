@@ -1,11 +1,10 @@
 package ec.edu.puce.githubclient.ui.components
 
-import android.R.attr.name
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -30,7 +29,7 @@ fun RepoItem(
 ) {
     Card (
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .padding(all = 8.dp)
     ){
         Row (
@@ -40,7 +39,7 @@ fun RepoItem(
         ){
             AsyncImage(
                 model = avatarImg,
-                conentDescription = "Imagen de $name",
+                contentDescription = "Imagen de $name",
                 modifier = Modifier.size( size = 60.dp),
                 contentScale = ContentScale.Crop
             )
@@ -49,17 +48,17 @@ fun RepoItem(
                 Text(
                     text = name,
                     style = MaterialTheme.typography.titleMedium,
-                    frontWeigth = FontWeight.Bold
+                    fontWeight = FontWeight.Bold
                 )
-                Spacer(modifier = Modifier.width( width = 16.dp))
+                Spacer(modifier = Modifier.height( height = 4.dp))
                 Text(
-                    text = name,
+                    text = description,
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 3
                 )
-                Spacer(modifier = Modifier.width( width = 16.dp))
+                Spacer(modifier = Modifier.height( height = 4.dp))
                 Text(
-                    text = name,
+                    text = language,
                     style = MaterialTheme.typography.labelSmall,
                 )
             }
@@ -74,6 +73,6 @@ fun RepoItemPreview() {
         name = "Repositorio Django",
         description = "Proyecto de python",
         avatarImg = "https://static.vecteezy.com/system/resources/thumbnails/047/656/219/small_2x/abstract-logo-design-for-any-corporate-brand-business-company-vector.jpg",
-        "Python"
+        language = "Python"
     )
 }
