@@ -30,7 +30,7 @@ class RepoListViewModel : ViewModel() {
             try {
                 _repos.value = RetrofitClient.apiService.getRepositories()
             } catch (e: Exception) {
-                _errorMsg.value = "Error al cargar repositorios: ${e.localizedMessage}"
+                _errorMsg.value = "Error al cargar los repositorios: ${e.localizedMessage}"
                 e.printStackTrace()
             } finally {
                 _isLoading.value = false
