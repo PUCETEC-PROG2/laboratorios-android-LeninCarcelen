@@ -36,11 +36,9 @@ class RepoFormViewModel : ViewModel() {
             }
         }
     }
-
     fun resetSuccess() {
         _isSuccess.value = false
     }
-
     fun resetError() {
         _errorMsg.value = null
     }
