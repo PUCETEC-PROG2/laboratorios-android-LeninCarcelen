@@ -8,9 +8,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.viewmodel.compose.viewModel
 import ec.edu.puce.githubclient.ui.screens.RepoForm
 import ec.edu.puce.githubclient.ui.screens.RepoList
 import ec.edu.puce.githubclient.ui.theme.GithubClientTheme
+import ec.edu.puce.githubclient.viewmodels.RepoListViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,13 +20,24 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             var currentScreen by remember { mutableStateOf("repoList") }
+            val listViewModel: RepoListViewModel = viewModel()
+            
             GithubClientTheme {
                 when (currentScreen) {
                     "repoList" -> RepoList(
-                        onNavigateToForm = { currentScreen = "repoForm" }
+                        viewModel = listViewModel,
+                        onNavigateToForm = {
+                            currentScreen = "repoForm"
+                        }
                     )
                     "repoForm" -> RepoForm(
-                        onBack = { currentScreen = "repoList" }
+                        onBack = {
+                            currentScreen = "repoList"
+                        },
+                        onSaveSuccess = {
+                            listViewModel.fetchRepos()
+                            currentScreen = "repoList"
+                        }
                     )
                 }
             }
